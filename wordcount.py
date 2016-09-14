@@ -44,17 +44,16 @@ def read_words(filename):
 	return words
 
 def print_words(filename):
-	words = read_words(filename)
-	words.sort(key=lambda x: x[0])
-	for w in words:
-		print(w[0], w[1])
+        words = read_words(filename)
+        words.sort(key=lambda x: x[0])
+        for word,count in words:
+                print(word, count)
 
 def print_top(filename):
-	words = read_words(filename)
-	words.sort(key=lambda x: -x[1])
-	l = len(words) if len(words) <= 20 else 20
-	for i in range(l):
-		print(words[i][0], words[i][1])
+        words = read_words(filename)
+        words.sort(key=lambda x: -x[1])
+        for word,count in words[:20]:
+                print(word, count)
 
 # Define print_words(filename) and print_top(filename) functions.
 # You could write a helper utility function that reads a file

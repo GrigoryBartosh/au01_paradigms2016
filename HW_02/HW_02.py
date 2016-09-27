@@ -22,10 +22,10 @@ def all_files(top_dir):
 def get_hash(file):
         with open(file, mode='rb') as f:
                 hashe = hasher()
-                data = f.read(1024)
+                data = f.read(256)
                 while data:
                         hashe.update(data)
-                        data = f.read(1024)
+                        data = f.read(256)
                 return hashe.hexdigest()
 
 def group_files(top_dir):

@@ -17,7 +17,10 @@ def all_files(top_dir):
                 for name in files:
                         if (name[0] == '.') or (name[0] == '~'):
                                 continue
-                        yield path.join(root,name)
+                        file = path.join(root,name)
+                        if os.path.islink(file):
+                                continue
+                        yield file
 
 def get_hash(file):
         with open(file, mode='rb') as f:
@@ -29,19 +32,19 @@ def get_hash(file):
                 return hashe.hexdigest()
 
 def group_files(top_dir):
-        dict = collections.defaultdict(list)
+        files_dict = collections.defaultdict(list)
         for file in all_files(top_dir):
                 h = get_hash(file)
-                dict[h].append(os.path.relpath(file,top_dir))
-        return dict
+                files_dict[h].append(os.path.relpath(file,top_dir))
+        return files_dict
 
-def print_same(dict):
-        for k, files in dict.items():
+def print_same(files_dict):
+        for k, files in files_dict.items():
                 if len(files) == 1:
                         continue
                 print(':'.join(files))
 
 if __name__ == "__main__":
-        dir = parse_dir(sys.argv)
-        dict = group_files(dir)
-        print_same(dict)
+        top_dir = parse_dir(sys.argv)
+        files_dict = group_files(top_dir)
+        print_same(files_dict)

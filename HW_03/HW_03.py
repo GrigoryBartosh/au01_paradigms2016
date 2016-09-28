@@ -34,13 +34,6 @@ def strassen(a, b):
 
 if __name__ == "__main__":
         n = int(input())
-        
-        if n == 1:
-                a = int(input())
-                b = int(input())
-                print(a*b)
-                sys.exit(0)
-        
         m = 1
         while m < n:
                 m *= 2
@@ -48,7 +41,7 @@ if __name__ == "__main__":
         a = np.zeros((m,m), dtype=np.int)
         b = np.zeros((m,m), dtype=np.int)
 
-        data = np.loadtxt(sys.stdin)
+        data = np.loadtxt(sys.stdin, ndmin=2)
         a[:n,:n] = data[:n]
         b[:n,:n] = data[n:]
 

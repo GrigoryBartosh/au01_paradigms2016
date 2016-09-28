@@ -8,7 +8,7 @@ from hashlib import sha1 as hasher
 
 def parse_dir(argv):
         if len(argv) != 2:
-                print('Wrong format, enter top directory')
+                print('usage: python3 HW_02.py <top_dir>')
                 sys.exit(0)
         return argv[1]
 

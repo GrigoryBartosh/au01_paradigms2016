@@ -24,7 +24,7 @@ def strassen(a, b):
         p6 = strassen(a21-a11, b11+b12)
         p7 = strassen(a12-a22, b21+b22)
 
-        c = np.arange(4*n*n).reshape(2*n,2*n)
+        c = np.empty(shape=(2*n, 2*n), dtype=np.int) 
         c[:n,:n] = p1+p4-p5+p7
         c[:n,n:] = p3+p5
         c[n:,:n] = p2+p4
@@ -34,6 +34,13 @@ def strassen(a, b):
 
 if __name__ == "__main__":
         n = int(input())
+        
+        if n == 1:
+                a = int(input())
+                b = int(input())
+                print(a*b)
+                sys.exit(0)
+        
         m = 1
         while m < n:
                 m *= 2

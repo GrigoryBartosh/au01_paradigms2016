@@ -6,7 +6,7 @@ class Scope:
 
     def __getitem__(self, item):
         if not item in self.dct:
-            if self.parent != None:
+            if self.parent:
                 return self.parent[item]
             else:
                 return None
@@ -62,6 +62,10 @@ class Conditional:
             tmp = self.if_true
         else:
             tmp = self.if_false
+
+        if tmp == None:
+            return Number(0)
+
         for f in tmp:
             res = f.evaluate(scope)
         return res

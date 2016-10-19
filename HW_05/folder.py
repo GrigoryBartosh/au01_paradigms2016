@@ -32,7 +32,7 @@ class ConstantFolder:
 		return conditional
 
 	def visitPrint(self, prnt):
-		prnt.extr = self.visit(prnt.extr)
+		prnt.expr = self.visit(prnt.expr)
 		return prnt
 
 	def visitRead(self, read):

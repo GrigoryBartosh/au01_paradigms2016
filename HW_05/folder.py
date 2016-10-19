@@ -35,7 +35,7 @@ class ConstantFolder:
 		prnt.extr = self.visit(prnt.extr)
 		return prnt
 
-	def vesitRead(self, read):
+	def visitRead(self, read):
 		return read
 
 	def visitFunctionCall(self, foo):

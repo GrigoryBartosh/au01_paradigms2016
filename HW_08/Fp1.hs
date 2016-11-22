@@ -37,10 +37,10 @@ concat' (x : xs) l = x : (concat' xs l)
 quickSort' :: Ord a => [a] -> [a]
 quickSort' [] = []
 quickSort' [x] = [x]
-quickSort' (x : xs) = (quickSort' l') ++ [x] ++ (quickSort' r')
+quickSort' (x : xs) = concat' (concat' (quickSort' l') [x]) (quickSort' r')
 	where
-		l' = filter (< x) xs
-		r' = filter (>= x) xs
+		l' = filter' (< x) xs
+		r' = filter' (>= x) xs
 
 main = do
 	print (quickSort' [8,800,5,5,5,3,5,3,5])

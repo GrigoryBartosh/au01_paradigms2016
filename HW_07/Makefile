@@ -1,6 +1,6 @@
 
 CC       ?= gcc
-CFLAGS   ?= -Wall -Wextra -std=c99 -g
+CFLAGS   ?= -Wall -Wextra -Werror -std=c99 -g
 LDFLAGS  ?= -lpthread
 SRCS     ?= main.c thread_pool.c linkedlist.c queue.c squeue.c wsqueue.c
 INCLUDES ?= -I include

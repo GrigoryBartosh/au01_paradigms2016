@@ -172,9 +172,7 @@ class BinaryOperationTest(unittest.TestCase):
                     if j == 0 and (s == '/' or s == '%'):
                         continue
                     with patch('sys.stdout', new_callable=StringIO) as output:
-                        self.scope['a'] = Number(i)
-                        self.scope['b'] = Number(j)
-                        res = BinaryOperation(self.scope['a'], s, self.scope['b']).evaluate(self.scope)
+                        res = BinaryOperation(Number(i), s, Number(j)).evaluate(self.scope)
                         Print(res).evaluate(self.scope)
                         self.assertEqual(output.getvalue(), str(f(i,j)) + '\n')
 
@@ -183,9 +181,7 @@ class BinaryOperationTest(unittest.TestCase):
             for j in range(-self.board, self.board):
                 for s, f in self.arr_l.items():
                     with patch('sys.stdout', new_callable=StringIO) as output:
-                        self.scope['a'] = Number(i)
-                        self.scope['b'] = Number(j)
-                        res = BinaryOperation(self.scope['a'], s, self.scope['b']).evaluate(self.scope)
+                        res = BinaryOperation(Number(i), s, Number(j)).evaluate(self.scope)
                         Print(res).evaluate(self.scope)
                         if f(i,j):
                             self.assertNotEqual(output.getvalue(), '0\n')
@@ -202,16 +198,14 @@ class UnaryOperationTest(unittest.TestCase):
     def test_minus(self):
         for i in range(-self.board, self.board):
             with patch('sys.stdout', new_callable=StringIO) as output:
-                self.scope['a'] = Number(i)
-                res = UnaryOperation('-', self.scope['a']).evaluate(self.scope)
+                res = UnaryOperation('-', Number(i)).evaluate(self.scope)
                 Print(res).evaluate(self.scope)
                 self.assertEqual(output.getvalue(), str(-i) + '\n')
 
     def test_negation(self):
         for i in range(-self.board, self.board):
             with patch('sys.stdout', new_callable=StringIO) as output:
-                self.scope['a'] = Number(i)
-                res = UnaryOperation('!', self.scope['a']).evaluate(self.scope)
+                res = UnaryOperation('!', Number(i)).evaluate(self.scope)
                 Print(res).evaluate(self.scope)
                 if not i:
                     self.assertNotEqual(output.getvalue(), '0\n')
